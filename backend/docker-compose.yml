@@ -30,9 +30,6 @@ services:
      ports:
        - 8080:8080
      command: mvn spring-boot:run
-     volumes:
-      - /home/alanabarbosa/Documents/Curso/react/react-and-spring-boot/backend/src
-      - /home/alanabarbosa/Documents/Curso/react/react-and-spring-boot/backend/target
      depends_on:
        - db
      networks:
