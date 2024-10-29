@@ -1,0 +1,38 @@
+# Geral
+node_modules/
+.vscode/
+*.log
+
+# Arquivos do Maven
+target/
+*.jar
+*.war
+
+# Arquivos do Docker
+docker-compose.override.yml
+.env
+
+# Diretórios de build do frontend
+dist/
+build/
+.cache/
+.vite/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+.idea/
+
+# Arquivos grandes
+*.class
+*.project
+*.iml
+*.ipr
+*.pyc
+*.swp
+
+# Excluir JARs do backend
+backend/target/*.jar
+
