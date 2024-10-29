@@ -1,0 +1,5 @@
+![Forks](https://img.shields.io/github/forks/alanabarbosa/spring-boot-with-docker)
+![Stars](https://img.shields.io/github/stars/alanabarbosa/spring-boot-with-docker)
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/alanabarbosa/rest-with-spring-boot-erudio.svg)](https://hub.docker.com/repository/docker/alanabarbosa/rest-with-spring-boot-erudio)
+[![Continuous Integration with Github Actions](https://github.com/alanabarbosa/spring-boot-with-docker/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/alanabarbosa/spring-boot-with-docker/actions/workflows/continuous-integration.yml)
+![Last Commit](https://img.shields.io/github/last-commit/alanabarbosa/spring-boot-with-docker)
