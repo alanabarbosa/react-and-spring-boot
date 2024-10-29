@@ -60,6 +60,7 @@
     padding: 24px;
     border-radius: 8px;
     position: relative;
+    transition: all .5s;
 }
 
 .book-container ul li button {

@@ -1,4 +1,5 @@
 package io.github.alanabarbosa.config;
+import java.util.List;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 
 import io.github.alanabarbosa.security.jwt.JwtTokenProvider;
 import io.github.alanabarbosa.services.JwtConfigurer;
@@ -49,25 +51,30 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .httpBasic(basic -> basic.disable())
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(
-                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(
-                        authorizeHttpRequests -> authorizeHttpRequests
-                                .requestMatchers(
-                                        "/auth/signin",
-                                        "/auth/refresh/**",
-                                        "/swagger-ui/**",
-                                        "/v3/api-docs/**"
-                                ).permitAll()
-                                .requestMatchers("/api/**").authenticated()
-                                .requestMatchers("/users").denyAll()
-                )
-                .cors(cors -> {})
-                .apply(new JwtConfigurer(tokenProvider))
-                .and()
-                .build();
- 
+            .httpBasic(basic -> basic.disable())
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                .requestMatchers(
+                    "/auth/signin",
+                    "/auth/refresh/**",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**"
+                ).permitAll()
+                .requestMatchers("/api/**").authenticated()
+                .requestMatchers("/users").denyAll()
+            )
+            .cors(cors -> cors.configurationSource(request -> {
+                CorsConfiguration config = new CorsConfiguration();
+                config.setAllowedOrigins(List.of("http://localhost:5173")); 
+                config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                config.setAllowedHeaders(List.of("*"));
+                config.setAllowCredentials(true);
+                return config;
+            }))
+            .apply(new JwtConfigurer(tokenProvider))
+            .and()
+            .build();
     }
+
 }
